@@ -16,4 +16,7 @@ node {
         junit '**/target/surefire-reports/TEST-*.xml'
         archive 'target/*.jar'
     }
+    stage('PWS') {
+        pushToCloudFoundry cloudSpace: 'development', credentialsId: 'pcf', manifestChoice: [manifestFile: 'target/classes/manifest.yml'], organization: 'microbule', target: 'https://api.run.pivotal.io'
+    }
 }

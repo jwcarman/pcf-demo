@@ -6,7 +6,7 @@ node {
     }
     stage('Build') {
         withMaven(jdk: 'JDK8', maven: 'Maven 3.5.x', mavenSettingsConfig: 'maven-settings') {
-            sh "mvn clean deploy"
+            sh "mvn clean test deploy -DdeployAtEnd=true"
         }
     }
     stage('Results') {

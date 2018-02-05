@@ -5,7 +5,9 @@ node {
         mvnHome = tool 'Maven 3.5.x'
     }
     stage('Build') {
-        sh "'${mvnHome}/bin/mvn' clean deploy"
+        withMaven(jdk: 'JDK8', maven: 'Maven 3.5.x', mavenSettingsConfig: 'maven-settings') {
+            sh "mvn clean deploy"
+        }
     }
     stage('Results') {
         junit '**/target/surefire-reports/TEST-*.xml'
